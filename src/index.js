@@ -16,15 +16,12 @@ module.exports = function getZerosCount(number, base) {
             preResult[n] += tempNumber;
         }
     }
-    preResult.forEach(function(a){
-        if (zero[a] !== undefined)
-            zero[a]++;
-        else
-            zero[a] = 1;
+    preResult.forEach(a => {
+       (zero[a] !== undefined)? zero[a]++ : zero[a] = 1;
     });
     for(let key in zero){
         result.push(Math.floor(+key/zero[key]));
     }
-    result.sort((a, b) => a > b? 1 : -1);
+    result.sort((a, b) => a - b);
     return result[0];
 };
