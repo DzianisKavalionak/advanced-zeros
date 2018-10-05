@@ -10,7 +10,6 @@ module.exports = function getZerosCount(number, base) {
     }
     for (let n = 0; n < arrs.length; n++ ){
         let tempNumber = number;
-        console.log(n);
         preResult[n] = 0;
         for (tempNumber; tempNumber > 0; tempNumber) {
             tempNumber = Math.floor(tempNumber / arrs[n]);
