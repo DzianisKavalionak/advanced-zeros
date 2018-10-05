@@ -1,29 +1,31 @@
 module.exports = function getZerosCount(number, base) {
-    let zeros = 0;
-    let n = 0;
-    let a = n;
-    let array = [];
-    for (let n = 1; n < base; n++){
-        if (base % n === 0) {
-            a = n;
-            array.push(a);
+    let [simpleNum, arrs, result, preResult, si, zero] = [0, [], [], [],  base, {}];
+    for (let n = 2; n <= base; n++ ){
+        simpleNum = si % n;
+        if(simpleNum === 0){
+            arrs.push(n);
+            si = si / n;
+            n--;
         }
     }
-    if (a !== 1 && Math.pow(array[1], array.length - 1) !== array[array.length - 1]) {
-        for (let i = a; number / i >= 1; i) {
-            zeros += Math.floor(number / i);
-            i = i * a;
+    for (let n = 0; n < arrs.length; n++ ){
+        let tempNumber = number;
+        console.log(n);
+        preResult[n] = 0;
+        for (tempNumber; tempNumber > 0; tempNumber) {
+            tempNumber = Math.floor(tempNumber / arrs[n]);
+            preResult[n] += tempNumber;
         }
-    } else if (a === 1){
-            for (let i = base; number / i >= 1; i) {
-                zeros += Math.floor(number / i)  ;
-                i = i * base;
-            }
-    } else if  (Math.pow(array[1], array.length - 1) === array[array.length - 1]){
-            for (let i = array[1]; number / i >= 1; i) {
-                zeros += Math.floor(number / i) / array.length ;
-                i = i * array[1];
-            }
     }
-    return Math.floor(zeros);
-}
+    preResult.forEach(function(a){
+        if (zero[a] !== undefined)
+            zero[a]++;
+        else
+            zero[a] = 1;
+    });
+    for(let key in zero){
+        result.push(Math.floor(+key/zero[key]));
+    }
+    result.sort((a, b) => a > b? 1 : -1);
+    return result[0];
+};
